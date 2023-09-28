@@ -1,4 +1,3 @@
-
 // Function to create a promise with a random delay between 1 and 3 seconds
 function createPromise(id) {
   const delay = Math.floor(Math.random() * 3000) + 1000; // Random delay between 1 and 3 seconds
@@ -17,10 +16,13 @@ function updateTableWithPromises() {
   // Select the table body
   const tableBody = document.getElementById("output");
 
-  // Remove any existing rows
-  while (tableBody.firstChild) {
-    tableBody.removeChild(tableBody.firstChild);
-  }
+  // Create a row for loading text
+  const loadingRow = document.createElement("tr");
+  const loadingCol = document.createElement("td");
+  loadingCol.textContent = "Loading...";
+  loadingCol.colSpan = 2; // Span two columns
+  loadingRow.appendChild(loadingCol);
+  tableBody.appendChild(loadingRow);
 
   // Create an array to store the promises
   const promises = [];
@@ -33,6 +35,9 @@ function updateTableWithPromises() {
   // Wait for all promises to resolve
   Promise.all(promises)
     .then((results) => {
+      // Remove the loading row
+      loadingRow.remove();
+
       // Create rows for each promise result
       results.forEach((result) => {
         const newRow = document.createElement("tr");
