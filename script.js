@@ -19,7 +19,7 @@ function updateTableWithPromises() {
   // Create a row for loading text
   const loadingRow = document.createElement("tr");
   const loadingCol = document.createElement("td");
-  loadingCol.textContent = "loading";
+  loadingCol.textContent = "Loading...";
   loadingCol.colSpan = 2; // Span two columns
   loadingRow.appendChild(loadingCol);
   tableBody.appendChild(loadingRow);
